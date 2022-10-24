@@ -6,7 +6,7 @@ mp_pose = mp.solutions.pose
 cap = cv2.VideoCapture("warrior.mp4")
 
 
-def calculate_angle(A, B, C):
+def calculate_angle(A, B, C):     #Calculates angle of B between three given points A, B, C using 3d coordinates 
 
     Ax, Ay = A[0] - B[0], A[1] - B[1]
     Cx, Cy = C[0] - B[0], C[1] - B[1]
@@ -27,7 +27,7 @@ def calculate_angle(A, B, C):
 
 
 
-def check_angle(samples):
+def check_angle(samples):                      #Compares both the poses
     for i in range(len(samples)):
         if abs(samples[i] - joint_angles[i]) > 20:
             
@@ -42,7 +42,7 @@ def check_angle(samples):
 
     return True
 
-with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:      #Set up mediapipe instance
     while cap.isOpened():
         ret, frame = cap.read()
 
@@ -67,7 +67,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         )
 
 
-        # Extract landmarks
+                                                                                     # Extract landmarks
         try:
             
             landmarks = results.pose_landmarks.landmark
@@ -134,7 +134,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             ]
 
 
-            joint_angles = (
+            joint_angles = (                                               #Extracts angles
                 calculate_angle(
                     Lshoulder, Lelbow, Lwrist
                 ),  # Calculates angle of left elbow
@@ -168,7 +168,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             )
 
             
-            print(joint_angles)
+            print(joint_angles)                                                   #prints given angles
             
         except:
             pass
