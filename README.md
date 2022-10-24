@@ -4,6 +4,7 @@ AI powered pose trainer. Upload a pose and learn it!
 
 ## Install dependancies
 ```pip install mediapipe```
+
 ```pip install opencv-python```
 
 ## Use PoseMaster
