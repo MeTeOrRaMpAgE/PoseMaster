@@ -27,20 +27,7 @@ def calculate_angle(A, B, C):     #Calculates angle of B between three given poi
 
 
 
-def check_angle(samples):                      #Compares both the poses
-    for i in range(len(samples)):
-        if abs(samples[i] - joint_angles[i]) > 20:
-            
-            return False
-    mp_drawing.draw_landmarks(
-            image,
-            results.pose_landmarks,
-            mp_pose.POSE_CONNECTIONS,
-            mp_drawing.DrawingSpec(color=(119, 255, 0), thickness=2, circle_radius=2),
-            mp_drawing.DrawingSpec(color=(119, 255, 0), thickness=2, circle_radius=2),
-        )
 
-    return True
 
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:      #Set up mediapipe instance
     while cap.isOpened():
@@ -55,7 +42,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
         # Recolor back to BGR
         image.flags.writeable = True
-        image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
          # Render detections
         mp_drawing.draw_landmarks(
